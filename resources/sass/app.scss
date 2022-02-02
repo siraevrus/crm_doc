@@ -1,0 +1,104 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.header {
+    height: 40px;
+    margin-bottom: 60px;
+
+    .logo {
+        color: #000;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        line-height: 40px;
+    }
+}
+.manage {
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.modal {
+    top: 40%;
+    &.active {
+        display: block;
+    }
+}
+.modal-backdrop {
+    display: none;
+    &.show {
+        display: block;
+    }
+}
+ul.pagination {
+    margin-top: 100px;
+    li {
+        padding: 0 5px 0;
+        &.active {
+            border: 1px solid #000
+        }
+        a {
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+.documents {
+    width: 100%;
+}
+.clients {
+    table {
+        width: 100%;
+        th:nth-child(5), th:nth-child(6) {
+            width: 50px;
+        }
+        tr {
+            border-bottom: 1px solid #ccc;
+        }
+        td {
+            span {
+                display: block;
+                padding: 5px 0;
+            }
+        }
+    }
+    .doc {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .sign {
+        color: #ff0000;
+
+        &.signed {
+            color: #00ff00;
+        }
+    }
+}
+.doc-type-filter {
+    a {
+        text-decoration: none;
+        padding: 0 5px;
+        div {
+            display: inline-block;
+            padding-right: 5px;
+            color: #000;
+        }
+        &.active {
+            text-decoration: underline;
+            color: #000000;
+        }
+    }
+}
