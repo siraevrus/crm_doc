@@ -57,10 +57,16 @@ ul.pagination {
 }
 .documents {
     width: 100%;
+    th:nth-child(4), td:nth-child(4) {
+        text-align: center;
+    }
     .document {
         .form-control {
             padding: 0.175rem 0.715rem;
             max-width: 200px;
+        }
+        td {
+            height: 50px;
         }
         td:nth-child(2) {
             max-width: 200px;

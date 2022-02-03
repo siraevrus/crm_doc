@@ -29658,7 +29658,7 @@ var render = function () {
               _vm._m(0),
               _vm._v(" "),
               _vm._l(_vm.documents, function (document, index) {
-                return _c("tr", { staticClass: "document mb-3" }, [
+                return _c("tr", { staticClass: "document" }, [
                   _c("td", [
                     _c("input", {
                       directives: [
@@ -29802,7 +29802,7 @@ var render = function () {
                         staticClass: "btn btn-outline-danger",
                         on: {
                           click: function ($event) {
-                            return _vm.showDeletePopup(document.id)
+                            return _vm.showDeletePopup(document, index)
                           },
                         },
                       },

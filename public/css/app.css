@@ -11340,9 +11340,15 @@ ul.pagination li a:hover {
 .documents {
   width: 100%;
 }
+.documents th:nth-child(4), .documents td:nth-child(4) {
+  text-align: center;
+}
 .documents .document .form-control {
   padding: 0.175rem 0.715rem;
   max-width: 200px;
+}
+.documents .document td {
+  height: 50px;
 }
 .documents .document td:nth-child(2) {
   max-width: 200px;

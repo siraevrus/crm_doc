@@ -6,6 +6,7 @@ use App\Creators\ClientDocumentFactory;
 use App\Creators\ClientFactory;
 use App\Creators\Contracts\ClientDocumentFactoryContract;
 use App\Creators\Contracts\ClientFactoryContract;
+use App\Models\ClientDocument;
 use App\Repositories\ClientRepository;
 use App\Repositories\Contracts\ClientRepositoryContract;
 use App\Services\BaseClientService;
@@ -40,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
         Route::bind('client',
             fn ($value) => app(ClientServiceContract::class)->getOne($value)
         );
+        Route::model('document', ClientDocument::class);
     }
 }

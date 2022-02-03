@@ -16,7 +16,7 @@
                         <th>Подписан</th>
                         <th></th>
                     </tr>
-                    <tr class="document mb-3" v-for="(document, index) in documents">
+                    <tr class="document" v-for="(document, index) in documents">
                         <td>
                             <input class="form-control" v-bind:class="{'is-invalid': !document.name || document.name === ''}" type="text" v-model="document.name">
                         </td>
@@ -35,7 +35,7 @@
                             <input type="checkbox" v-model="document.signed">
                         </td>
                         <td>
-                            <button v-on:click="showDeletePopup(document.id)" class="btn btn-outline-danger">x</button>
+                            <button v-on:click="showDeletePopup(document, index)" class="btn btn-outline-danger">x</button>
                         </td>
                     </tr>
                 </table>

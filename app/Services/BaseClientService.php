@@ -50,7 +50,7 @@ class BaseClientService implements ClientServiceContract
 
     public function deleteDocument(ClientDocument $clientDocument)
     {
-        Storage::delete($clientDocument->path);
+        Storage::delete($clientDocument->file);
         $clientDocument->delete();
     }
 
