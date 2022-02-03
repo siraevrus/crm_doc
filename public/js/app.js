@@ -5551,6 +5551,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var index in th.documents) {
+        if (!th.documents[index].name || th.documents[index].name === '') return;
         if (th.documents[index].file && th.documents[index].file !== '') documents.push(th.documents[index]);
       }
 
@@ -5571,6 +5572,7 @@ __webpack_require__.r(__webpack_exports__);
       this.documents.push({
         name: "",
         file: "",
+        type: "",
         signed: false
       });
     },
@@ -5696,6 +5698,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var index in th.documents) {
+        if (!th.documents[index].name || th.documents[index].name === '') return;
         if (th.documents[index].file && th.documents[index].file !== '') documents.push(th.documents[index]);
       }
 
@@ -29245,6 +29248,10 @@ var render = function () {
                           expression: "document.name",
                         },
                       ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": !document.name || document.name === "",
+                      },
                       attrs: { type: "text" },
                       domProps: { value: document.name },
                       on: {
@@ -29407,9 +29414,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Документ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Подписан")]),
+      _c("th", [_vm._v("Тип документа")]),
       _vm._v(" "),
-      _c("th"),
+      _c("th", [_vm._v("Подписан")]),
     ])
   },
 ]
@@ -29493,6 +29500,10 @@ var render = function () {
                           expression: "document.name",
                         },
                       ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": !document.name || document.name === "",
+                      },
                       attrs: { type: "text" },
                       domProps: { value: document.name },
                       on: {
@@ -29650,9 +29661,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Документ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Подписан")]),
+      _c("th", [_vm._v("Тип документа")]),
       _vm._v(" "),
-      _c("th"),
+      _c("th", [_vm._v("Подписан")]),
     ])
   },
 ]

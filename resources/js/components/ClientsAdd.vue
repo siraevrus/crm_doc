@@ -12,12 +12,12 @@
                     <tr>
                         <th>Название</th>
                         <th>Документ</th>
+                        <th>Тип документа</th>
                         <th>Подписан</th>
-                        <th></th>
                     </tr>
                     <tr class="document mb-3" v-for="(document, index) in documents">
                         <td>
-                            <input type="text" v-model="document.name">
+                            <input class="form-control" v-bind:class="{'is-invalid': !document.name || document.name === ''}" type="text" v-model="document.name">
                         </td>
                         <td>
                             <input v-if="document.file === ''" type="file" name="document" @change.prevent="upload($event, index)">
@@ -64,7 +64,7 @@ export default {
                 headers: { "My-Awesome-Header": "header value" }
             },
             errors: {
-                name: false,
+                name: false
             }
         }
     },
@@ -83,9 +83,12 @@ export default {
                 th.errors[error] = false
             }
 
-            for(var index in th.documents)
-                if(th.documents[index].file && th.documents[index].file !== '')
+            for(var index in th.documents) {
+                if(!th.documents[index].name || th.documents[index].name === '')
+                    return
+                if (th.documents[index].file && th.documents[index].file !== '')
                     documents.push(th.documents[index])
+            }
 
             axios.post('/api/clients/', {
                 name: th.name,
@@ -106,6 +109,7 @@ export default {
             this.documents.push({
                 name: "",
                 file: "",
+                type: "",
                 signed: false
             });
         },

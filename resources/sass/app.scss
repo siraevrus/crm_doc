@@ -57,6 +57,12 @@ ul.pagination {
 }
 .documents {
     width: 100%;
+    .document {
+        .form-control {
+            padding: 0.175rem 0.715rem;
+            max-width: 250px;
+        }
+    }
 }
 .clients {
     table {
