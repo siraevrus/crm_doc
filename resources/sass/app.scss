@@ -60,8 +60,14 @@ ul.pagination {
     .document {
         .form-control {
             padding: 0.175rem 0.715rem;
-            max-width: 250px;
+            max-width: 200px;
         }
+        td:nth-child(2) {
+            max-width: 200px;
+        }
+    }
+    .btn-outline-danger {
+        padding: 0 5px;
     }
 }
 .clients {

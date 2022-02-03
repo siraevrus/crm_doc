@@ -5511,6 +5511,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5532,7 +5553,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       errors: {
         name: false
-      }
+      },
+      isShowDeletePopup: false,
+      itemForDeleting: 0,
+      itemIndexDeleting: 0
     };
   },
   mounted: function mounted() {},
@@ -5610,6 +5634,24 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response);
         });
       }
+    },
+    showDeletePopup: function showDeletePopup(item, index) {
+      if (item.file) {
+        this.isShowDeletePopup = true;
+        this.itemForDeleting = item.id;
+        this.itemIndexDeleting = index;
+      } else {
+        this.documents.splice(index, 1);
+      }
+    },
+    deleteDocument: function deleteDocument() {
+      var _this = this;
+
+      axios["delete"]('/api/documents/' + this.itemForDeleting).then(function (response) {
+        _this.isShowDeletePopup = false;
+
+        _this.documents.splice(_this.itemIndexDeleting, 1);
+      });
     }
   }
 });
@@ -5628,6 +5670,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ClientsAdd__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientsAdd */ "./resources/js/components/ClientsAdd.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5713,6 +5775,24 @@ __webpack_require__.r(__webpack_exports__);
             if (er in th.errors) th.errors[er] = true;
           }
         } else alert("Что-то пошло не так");
+      });
+    },
+    showDeletePopup: function showDeletePopup(item, index) {
+      if (item.file) {
+        this.isShowDeletePopup = true;
+        this.itemForDeleting = item.id;
+        this.itemIndexDeleting = index;
+      } else {
+        this.documents.splice(index, 1);
+      }
+    },
+    deleteDocument: function deleteDocument() {
+      var _this2 = this;
+
+      axios["delete"]('/api/documents/' + this.itemForDeleting).then(function (response) {
+        _this2.isShowDeletePopup = false;
+
+        _this2.documents.splice(_this2.itemIndexDeleting, 1);
       });
     }
   }
@@ -29378,6 +29458,21 @@ var render = function () {
                       },
                     }),
                   ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        on: {
+                          click: function ($event) {
+                            return _vm.showDeletePopup(document, index)
+                          },
+                        },
+                      },
+                      [_vm._v("x")]
+                    ),
+                  ]),
                 ])
               }),
             ],
@@ -29402,6 +29497,78 @@ var render = function () {
         ]
       ),
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        class: { active: _vm.isShowDeletePopup === true },
+        attrs: { tabindex: "-1" },
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v("Подтвердите удаление"),
+              ]),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close",
+                },
+                on: {
+                  click: function ($event) {
+                    _vm.isShowDeletePopup = false
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c("p", [_vm._v("Файл удалится безвозвратно")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-bs-dismiss": "modal" },
+                  on: {
+                    click: function ($event) {
+                      _vm.isShowDeletePopup = false
+                    },
+                  },
+                },
+                [_vm._v("Закрыть")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.deleteDocument },
+                },
+                [_vm._v("Удалить")]
+              ),
+            ]),
+          ]),
+        ]),
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "modal-backdrop",
+      class: { show: _vm.isShowDeletePopup === true },
+      on: {
+        click: function ($event) {
+          _vm.isShowDeletePopup = false
+        },
+      },
+    }),
   ])
 }
 var staticRenderFns = [
@@ -29417,6 +29584,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Тип документа")]),
       _vm._v(" "),
       _c("th", [_vm._v("Подписан")]),
+      _vm._v(" "),
+      _c("th"),
     ])
   },
 ]
@@ -29625,6 +29794,21 @@ var render = function () {
                       },
                     }),
                   ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        on: {
+                          click: function ($event) {
+                            return _vm.showDeletePopup(document.id)
+                          },
+                        },
+                      },
+                      [_vm._v("x")]
+                    ),
+                  ]),
                 ])
               }),
             ],
@@ -29649,6 +29833,78 @@ var render = function () {
         ]
       ),
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        class: { active: _vm.isShowDeletePopup === true },
+        attrs: { tabindex: "-1" },
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v("Подтвердите удаление"),
+              ]),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close",
+                },
+                on: {
+                  click: function ($event) {
+                    _vm.isShowDeletePopup = false
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c("p", [_vm._v("Файл удалится безвозвратно")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-bs-dismiss": "modal" },
+                  on: {
+                    click: function ($event) {
+                      _vm.isShowDeletePopup = false
+                    },
+                  },
+                },
+                [_vm._v("Закрыть")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.deleteDocument },
+                },
+                [_vm._v("Удалить")]
+              ),
+            ]),
+          ]),
+        ]),
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "modal-backdrop",
+      class: { show: _vm.isShowDeletePopup === true },
+      on: {
+        click: function ($event) {
+          _vm.isShowDeletePopup = false
+        },
+      },
+    }),
   ])
 }
 var staticRenderFns = [
@@ -29664,6 +29920,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Тип документа")]),
       _vm._v(" "),
       _c("th", [_vm._v("Подписан")]),
+      _vm._v(" "),
+      _c("th"),
     ])
   },
 ]

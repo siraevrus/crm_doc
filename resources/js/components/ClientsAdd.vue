@@ -14,6 +14,7 @@
                         <th>Документ</th>
                         <th>Тип документа</th>
                         <th>Подписан</th>
+                        <th></th>
                     </tr>
                     <tr class="document mb-3" v-for="(document, index) in documents">
                         <td>
@@ -33,6 +34,9 @@
                         <td>
                             <input type="checkbox" v-model="document.signed">
                         </td>
+                        <td>
+                            <button v-on:click="showDeletePopup(document, index)" class="btn btn-outline-danger">x</button>
+                        </td>
                     </tr>
                 </table>
 
@@ -41,6 +45,23 @@
                 <button type="submit" class="btn btn-primary mb-5">Добавить клиента</button>
             </form>
         </div>
+
+        <div class="modal" v-bind:class="{ active: isShowDeletePopup === true}" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Подтвердите удаление</h5>
+                        <button @click="isShowDeletePopup = false" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                        <p>Файл удалится безвозвратно</p>
+                        <button @click="isShowDeletePopup = false" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button @click="deleteDocument" type="button" class="btn btn-primary">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop" v-bind:class="{ show: isShowDeletePopup === true}" @click="isShowDeletePopup = false"></div>
     </div>
 </template>
 
@@ -65,7 +86,10 @@ export default {
             },
             errors: {
                 name: false
-            }
+            },
+            isShowDeletePopup: false,
+            itemForDeleting: 0,
+            itemIndexDeleting: 0
         }
     },
     mounted() {
@@ -147,7 +171,22 @@ export default {
                         console.log(response)
                     })
             }
-        }
+        },
+        showDeletePopup(item, index) {
+            if(item.file) {
+                this.isShowDeletePopup = true
+                this.itemForDeleting = item.id
+                this.itemIndexDeleting = index
+            } else {
+                this.documents.splice(index, 1)
+            }
+        },
+        deleteDocument() {
+            axios.delete('/api/documents/' + this.itemForDeleting).then(response => {
+                this.isShowDeletePopup = false
+                this.documents.splice(this.itemIndexDeleting, 1)
+            })
+        },
     }
 }
 </script>
