@@ -29466,6 +29466,7 @@ var render = function () {
                         staticClass: "btn btn-outline-danger",
                         on: {
                           click: function ($event) {
+                            $event.preventDefault()
                             return _vm.showDeletePopup(document, index)
                           },
                         },
@@ -29802,6 +29803,7 @@ var render = function () {
                         staticClass: "btn btn-outline-danger",
                         on: {
                           click: function ($event) {
+                            $event.preventDefault()
                             return _vm.showDeletePopup(document, index)
                           },
                         },

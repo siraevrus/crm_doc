@@ -35,7 +35,7 @@
                             <input type="checkbox" v-model="document.signed">
                         </td>
                         <td>
-                            <button v-on:click="showDeletePopup(document, index)" class="btn btn-outline-danger">x</button>
+                            <button @click.prevent="showDeletePopup(document, index)" class="btn btn-outline-danger">x</button>
                         </td>
                     </tr>
                 </table>
